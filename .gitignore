@@ -1,0 +1,30 @@
+# Python Environments & Secrets
+.env
+.venv/
+venv/
+snapshots/
+Vector_DB/
+env/
+cmd.sh
+node_modules
+Data/
+models/
+build/
+storage/
+qdrant_storage/
+# Python Cache & Build
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Manim Trainer & Generated Media
+manim-trainer/data/
+manim-trainer/output/
+media/
+partial_movie_files/
+
+# Backups & Editor Configs
+*.bak
+.DS_Store
+.vscode/
+.idea/
