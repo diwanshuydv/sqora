@@ -1,0 +1,18 @@
+include:
+  - path: ./sqora/docker-compose.stack.yml
+  - path: ./manim-trainer/docker-compose.yml
+  - path: ./HeadTTS/docker-compose.yml
+
+name: teaching
+
+networks:
+  default:
+    name: teaching-net
+    driver: bridge
+
+volumes:
+  shared-media:
+  qdrant-data:
+  vllm-model-cache:
+  huggingface-cache:
+  headtts_transformers_cache:
