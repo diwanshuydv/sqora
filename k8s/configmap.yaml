@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: teaching-app-config
+data:
+  CHARS_PER_TOKEN_ESTIMATE: "4.0"
+  HF_HOME: /root/.cache/huggingface
+  KYUTAI_TTS_URL: http://headtts:8882
+  MANIM_TIMEOUT_SEC: "300"
+  MAX_NEW_TOKENS: "4096"
+  MIN_OUTPUT_TOKENS: "256"
+  MODEL_CONTEXT_WINDOW: "16384"
+  PYTHONPATH: /app
+  QDRANT_COLLECTION: pyqs
+  QDRANT_HOST: qdrant
+  QDRANT_PORT: "6333"
+  QDRANT_URL: http://qdrant:6333
+  TOKEN_SAFETY_MARGIN: "256"
+  VLLM_API_BASE_URL: http://vllm:8000/v1
+  VLLM_HEALTH_URL: http://vllm:8000/health
+  VLLM_SERVER: http://vllm:8000
+  VLLM_SERVED_MODEL_NAME: seed-coder-grpo
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: unmute-runtime-config
+data:
+  config.json: |
+    {
+      "tts": {
+        "provider": "local",
+        "url": "http://headtts:8882/v1/synthesize"
+      },
+      "llm": {
+        "provider": "gemini",
+        "url": "https://generativelanguage.googleapis.com/v1beta/openai/",
+        "model": "gemini-2.5-flash-lite",
+        "fallback_model": "gemma-4-26b-a4b-it",
+        "context_compaction": {
+          "enabled": true,
+          "max_context_tokens": 7000,
+          "trigger_tokens": 5800,
+          "target_summary_tokens": 1200,
+          "keep_recent_messages": 8,
+          "model": "gemini-2.5-flash-lite",
+          "state_file": "../user_data/system/chat_compaction_state.json"
+        }
+      }
+    }

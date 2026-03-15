@@ -1,0 +1,33 @@
+FROM python:3.12-slim
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONUNBUFFERED=1 \
+    MPLCONFIGDIR=/tmp/matplotlib
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    ffmpeg \
+    git \
+    libcairo2-dev \
+    libpango1.0-dev \
+    pkg-config \
+    curl \
+    texlive \
+    texlive-latex-extra \
+    texlive-fonts-recommended \
+    texlive-science \
+    dvisvgm \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY manim-trainer/docker/vllm/requirements.runner.txt /tmp/requirements.runner.txt
+RUN pip install -r /tmp/requirements.runner.txt
+
+COPY manim-trainer/src /app/src
+COPY manim-trainer/tools /app/tools
+COPY manim-trainer/docker/vllm/entrypoint.runner.sh /entrypoint.runner.sh
+RUN chmod +x /entrypoint.runner.sh
+
+ENTRYPOINT ["/entrypoint.runner.sh"]

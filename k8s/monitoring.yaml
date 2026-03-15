@@ -1,0 +1,37 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: qdrant
+  labels:
+    app.kubernetes.io/name: qdrant
+spec:
+  selector:
+    matchLabels:
+      app: qdrant
+  namespaceSelector:
+    matchNames:
+      - teaching
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s
+      scrapeTimeout: 10s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: vllm
+  labels:
+    app.kubernetes.io/name: vllm
+spec:
+  selector:
+    matchLabels:
+      app: vllm
+  namespaceSelector:
+    matchNames:
+      - teaching
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
+      scrapeTimeout: 10s

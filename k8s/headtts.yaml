@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: headtts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: headtts
+  template:
+    metadata:
+      labels:
+        app: headtts
+    spec:
+      containers:
+        - name: headtts
+          image: teaching-headtts:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8882
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+          volumeMounts:
+            - name: huggingface-cache
+              mountPath: /app/node_modules/@huggingface/transformers/.cache
+          readinessProbe:
+            tcpSocket:
+              port: 8882
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8882
+            initialDelaySeconds: 20
+            periodSeconds: 20
+      volumes:
+        - name: huggingface-cache
+          persistentVolumeClaim:
+            claimName: huggingface-cache
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: headtts
+spec:
+  selector:
+    app: headtts
+  ports:
+    - name: http
+      port: 8882
+      targetPort: http

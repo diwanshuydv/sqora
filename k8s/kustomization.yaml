@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: teaching
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - pvc.yaml
+  - qdrant.yaml
+  - vllm.yaml
+  - headtts.yaml
+  - sqora-app.yaml
+  - frontend.yaml
+  - ingress.yaml
+  - hpa.yaml
+  - monitoring.yaml
