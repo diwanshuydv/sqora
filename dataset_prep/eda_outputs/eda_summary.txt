@@ -1,0 +1,123 @@
+EDA Pipeline Report
+===================
+
+Loading data from dataset.jsonl...
+Loaded 9827 records.
+--- Token Distribution Analysis ---
+Loading tokenizer: ByteDance-Seed/Seed-Coder-8B-Instruct...
+Description tokens -> 90th: 434.00, 95th: 483.00, 99th: 592.00
+Manim Code tokens -> 90th: 3228.80, 95th: 3693.70, 99th: 4628.10
+Saved token distributions plot to eda_outputs/token_distributions.png
+
+--- AST Validation & Class Frequency ---
+SyntaxError in row 329: '(' was never closed (<unknown>, line 130)
+SyntaxError in row 433: unexpected indent (<unknown>, line 49)
+SyntaxError in row 582: positional argument follows keyword argument (<unknown>, line 80)
+SyntaxError in row 593: unexpected character after line continuation character (<unknown>, line 174)
+SyntaxError in row 697: invalid decimal literal (<unknown>, line 71)
+SyntaxError in row 1125: '(' was never closed (<unknown>, line 203)
+SyntaxError in row 1285: '(' was never closed (<unknown>, line 165)
+SyntaxError in row 1286: '(' was never closed (<unknown>, line 151)
+SyntaxError in row 1287: '(' was never closed (<unknown>, line 108)
+SyntaxError in row 1435: invalid character 'ิ' (U+0E34) (<unknown>, line 1)
+SyntaxError in row 1590: positional argument follows keyword argument (<unknown>, line 80)
+SyntaxError in row 3293: unexpected character after line continuation character (<unknown>, line 123)
+SyntaxError in row 3928: unexpected indent (<unknown>, line 140)
+SyntaxError in row 4156: invalid decimal literal (<unknown>, line 93)
+SyntaxError in row 4285: f-string: single '}' is not allowed (<unknown>, line 89)
+SyntaxError in row 4597: invalid syntax (<unknown>, line 1)
+Unexpected error parsing row 4598: Parser stack overflowed - Python source too complex to parse
+SyntaxError in row 5258: positional argument follows keyword argument (<unknown>, line 137)
+SyntaxError in row 5333: invalid syntax (<unknown>, line 154)
+SyntaxError in row 5486: '(' was never closed (<unknown>, line 123)
+SyntaxError in row 5489: unterminated string literal (detected at line 138) (<unknown>, line 138)
+SyntaxError in row 5588: invalid syntax (<unknown>, line 36)
+SyntaxError in row 5601: unexpected indent (<unknown>, line 38)
+SyntaxError in row 5609: unexpected character after line continuation character (<unknown>, line 255)
+SyntaxError in row 5994: unexpected indent (<unknown>, line 65)
+SyntaxError in row 6094: '(' was never closed (<unknown>, line 124)
+SyntaxError in row 6095: '(' was never closed (<unknown>, line 117)
+SyntaxError in row 6246: '(' was never closed (<unknown>, line 166)
+SyntaxError in row 6247: '(' was never closed (<unknown>, line 166)
+SyntaxError in row 6553: '(' was never closed (<unknown>, line 210)
+SyntaxError in row 6554: '(' was never closed (<unknown>, line 2391)
+SyntaxError in row 6858: '(' was never closed (<unknown>, line 1863)
+SyntaxError in row 6860: '(' was never closed (<unknown>, line 161)
+SyntaxError in row 6880: cannot assign to expression (<unknown>, line 58)
+SyntaxError in row 6988: '(' was never closed (<unknown>, line 150)
+SyntaxError in row 7002: '(' was never closed (<unknown>, line 150)
+SyntaxError in row 7172: '(' was never closed (<unknown>, line 179)
+SyntaxError in row 7271: '(' was never closed (<unknown>, line 193)
+SyntaxError in row 7273: '(' was never closed (<unknown>, line 142)
+SyntaxError in row 7275: '(' was never closed (<unknown>, line 192)
+SyntaxError in row 7281: '(' was never closed (<unknown>, line 157)
+SyntaxError in row 7290: '(' was never closed (<unknown>, line 198)
+SyntaxError in row 7317: '(' was never closed (<unknown>, line 143)
+SyntaxError in row 7323: '(' was never closed (<unknown>, line 129)
+SyntaxError in row 7450: '(' was never closed (<unknown>, line 174)
+SyntaxError in row 7464: expected an indented block after 'for' statement on line 141 (<unknown>, line 141)
+SyntaxError in row 7466: '(' was never closed (<unknown>, line 149)
+SyntaxError in row 7637: '(' was never closed (<unknown>, line 182)
+SyntaxError in row 7915: '(' was never closed (<unknown>, line 169)
+SyntaxError in row 7942: '(' was never closed (<unknown>, line 169)
+SyntaxError in row 7948: '(' was never closed (<unknown>, line 199)
+SyntaxError in row 8101: '(' was never closed (<unknown>, line 166)
+SyntaxError in row 8351: unmatched ')' (<unknown>, line 135)
+SyntaxError in row 8380: '(' was never closed (<unknown>, line 158)
+SyntaxError in row 8384: '(' was never closed (<unknown>, line 185)
+SyntaxError in row 8407: '(' was never closed (<unknown>, line 170)
+SyntaxError in row 8408: '(' was never closed (<unknown>, line 152)
+SyntaxError in row 8569: invalid syntax (<unknown>, line 1)
+SyntaxError in row 8676: '(' was never closed (<unknown>, line 161)
+SyntaxError in row 8717: '(' was never closed (<unknown>, line 181)
+SyntaxError in row 8725: '(' was never closed (<unknown>, line 164)
+SyntaxError in row 8727: '(' was never closed (<unknown>, line 132)
+SyntaxError in row 8728: '(' was never closed (<unknown>, line 155)
+SyntaxError in row 8729: '(' was never closed (<unknown>, line 171)
+SyntaxError in row 8864: '(' was never closed (<unknown>, line 172)
+SyntaxError in row 8865: '(' was never closed (<unknown>, line 178)
+SyntaxError in row 8867: invalid syntax (<unknown>, line 138)
+SyntaxError in row 8869: '(' was never closed (<unknown>, line 170)
+SyntaxError in row 8870: '(' was never closed (<unknown>, line 157)
+SyntaxError in row 8991: '(' was never closed (<unknown>, line 177)
+SyntaxError in row 8993: '(' was never closed (<unknown>, line 166)
+SyntaxError in row 9021: unterminated string literal (detected at line 1) (<unknown>, line 1)
+SyntaxError in row 9097: unexpected character after line continuation character (<unknown>, line 114)
+SyntaxError in row 9127: unexpected indent (<unknown>, line 40)
+SyntaxError in row 9161: '(' was never closed (<unknown>, line 223)
+SyntaxError in row 9167: '(' was never closed (<unknown>, line 207)
+SyntaxError in row 9172: '(' was never closed (<unknown>, line 163)
+SyntaxError in row 9173: '(' was never closed (<unknown>, line 170)
+SyntaxError in row 9332: '(' was never closed (<unknown>, line 179)
+SyntaxError in row 9492: '(' was never closed (<unknown>, line 138)
+SyntaxError in row 9493: '(' was never closed (<unknown>, line 136)
+SyntaxError in row 9635: '(' was never closed (<unknown>, line 174)
+SyntaxError in row 9637: '(' was never closed (<unknown>, line 145)
+SyntaxError in row 9640: '(' was never closed (<unknown>, line 182)
+SyntaxError in row 9707: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 193)
+SyntaxError in row 9786: unterminated string literal (detected at line 145) (<unknown>, line 145)
+Dropped 86 rows with invalid syntax.
+Rows remaining: 9741
+Top 5 Manim classes instantiated: [('Text', 110813), ('Write', 100949), ('FadeOut', 51511), ('MathTex', 49767), ('Create', 47874)]
+Saved class frequency bar plot to eda_outputs/class_frequency.png
+
+--- Lexical Diversity & Ratios ---
+Top repeating prompt templates (bi-grams & tri-grams):
+  'using text': 19400
+  'using mathtex': 16245
+  'add text': 9532
+  'scene sequence': 9257
+  'display title': 8935
+  'sequence display': 8863
+  'scene sequence display': 8853
+  'sequence display title': 8384
+  'display text': 5337
+  'fade elements': 4128
+Mean Description/Code character ratio: 0.1594
+Saved correlation plot to eda_outputs/length_correlation.png
+
+--- Deduplication & Semantic Near-Duplicates ---
+Exact duplicates dropped: 0
+Loading sentence-transformers model: all-MiniLM-L6-v2 ...
+Encoding code snippets...
+Computing cosine similarities...
