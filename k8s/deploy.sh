@@ -12,6 +12,10 @@ CPUS="${MINIKUBE_CPUS:-6}"
 MEMORY="${MINIKUBE_MEMORY:-12288}"
 DISK_SIZE="${MINIKUBE_DISK_SIZE:-80g}"
 GRAFANA_NODEPORT="${GRAFANA_NODEPORT:-32000}"
+# Host directory containing the trained vLLM model weights.
+# Mounted into minikube at /mnt/sqora-model so the vllm initContainer can seed
+# the PVC on first boot without needing to pull from HuggingFace.
+MODEL_DIR="${VLLM_MODEL_DIR:-$ROOT_DIR/manim-trainer/output/merged_vllm_model}"
 
 require() {
   command -v "$1" >/dev/null 2>&1 || {
@@ -44,6 +48,9 @@ minikube start \
   --cpus="$CPUS" \
   --memory="$MEMORY" \
   --disk-size="$DISK_SIZE" \
+  --mount \
+  --mount-string="$MODEL_DIR:/mnt/sqora-model" \
+  --force \
   "${GPU_START_ARGS[@]}"
 
 echo "Enabling minikube addons..."

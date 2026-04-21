@@ -25,9 +25,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY manim-trainer/docker/vllm/requirements.runner.txt /tmp/requirements.runner.txt
 RUN pip install -r /tmp/requirements.runner.txt
 
+COPY manim-trainer/config.py /app/config.py
 COPY manim-trainer/src /app/src
 COPY manim-trainer/tools /app/tools
 COPY manim-trainer/docker/vllm/entrypoint.runner.sh /entrypoint.runner.sh
 RUN chmod +x /entrypoint.runner.sh
 
 ENTRYPOINT ["/entrypoint.runner.sh"]
+CMD ["uvicorn", "tools.inference_vllm:app", "--host", "0.0.0.0", "--port", "8080"]

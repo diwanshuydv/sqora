@@ -42,17 +42,25 @@ spec:
             - name: unmute-config
               mountPath: /app/Unmute/config.json
               subPath: config.json
+          # startupProbe gives the container up to 5 minutes (30 × 10s) to
+          # become healthy. Only after this succeeds do readiness/liveness kick in.
+          startupProbe:
+            httpGet:
+              path: /
+              port: backend
+            failureThreshold: 30
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
               port: backend
-            initialDelaySeconds: 20
+            initialDelaySeconds: 10
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /
               port: backend
-            initialDelaySeconds: 40
+            initialDelaySeconds: 30
             periodSeconds: 20
         - name: manim-runner
           image: teaching-manim-runner:latest
@@ -70,6 +78,12 @@ spec:
             limits:
               cpu: "2"
               memory: 4Gi
+          startupProbe:
+            httpGet:
+              path: /health
+              port: runner
+            failureThreshold: 30
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /health

@@ -4,6 +4,9 @@ metadata:
   name: teaching-app-config
 data:
   CHARS_PER_TOKEN_ESTIMATE: "4.0"
+  # Manim worker → manim-runner sidecar (same pod, so localhost is correct in K8s).
+  # The default 'host.docker.internal' only works in Docker-Compose, not K8s pods.
+  DOCKER_SERVER_URL: http://localhost:8080/generate
   HF_HOME: /root/.cache/huggingface
   KYUTAI_TTS_URL: http://headtts:8882
   MANIM_TIMEOUT_SEC: "300"

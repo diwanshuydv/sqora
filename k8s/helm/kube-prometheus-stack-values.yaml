@@ -5,6 +5,12 @@ grafana:
   service:
     type: NodePort
     nodePort: 32000
+  initChownData:
+    enabled: false
+  securityContext:
+    runAsUser: 472
+    runAsGroup: 472
+    fsGroup: 472
   persistence:
     enabled: true
     size: 5Gi

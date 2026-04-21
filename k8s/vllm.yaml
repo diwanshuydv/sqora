@@ -12,13 +12,44 @@ spec:
       labels:
         app: vllm
     spec:
+      enableServiceLinks: false
+      initContainers:
+        # Seeds the vllm-model-cache PVC from the host model directory on first boot.
+        # Uses --ignore-existing so subsequent pod restarts are near-instant.
+        - name: model-seeder
+          image: debian:bookworm-slim
+          command:
+            - bash
+            - -c
+            - |
+              set -euo pipefail
+              if [ ! -f /models/served-model/config.json ]; then
+                echo "[model-seeder] Seeding model files into PVC..."
+                apt-get update -qq && apt-get install -y -qq rsync
+                rsync -a --info=progress2 /model-src/ /models/served-model/
+                echo "[model-seeder] Done."
+              else
+                echo "[model-seeder] Model already present, skipping."
+              fi
+          volumeMounts:
+            - name: model-src
+              mountPath: /model-src
+              readOnly: true
+            - name: vllm-model-cache
+              mountPath: /models/served-model
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
       containers:
         - name: vllm
           image: teaching-vllm:latest
           imagePullPolicy: IfNotPresent
+          command: ["vllm", "serve", "/models/served-model"]
           args:
-            - --model
-            - /models/served-model
             - --served-model-name
             - seed-coder-grpo
             - --host
@@ -28,21 +59,25 @@ spec:
             - --max-model-len
             - "8192"
             - --gpu-memory-utilization
-            - "0.5"
-          envFrom:
-            - configMapRef:
-                name: teaching-app-config
+            - "0.9"
+          # Do NOT use envFrom here — Kubernetes injects VLLM_SERVICE_HOST,
+          # VLLM_PORT_8000_TCP_* etc. from service discovery, and vLLM's env
+          # scanner treats any VLLM_* variable as a config knob, causing
+          # spurious warnings and potential misconfigurations.
+          env:
+            - name: HF_HOME
+              value: /root/.cache/huggingface
           ports:
             - name: http
               containerPort: 8000
           resources:
             requests:
               cpu: "2"
-              memory: 8Gi
+              memory: 12Gi
               nvidia.com/gpu: "1"
             limits:
               cpu: "4"
-              memory: 16Gi
+              memory: 23Gi
               nvidia.com/gpu: "1"
           volumeMounts:
             - name: vllm-model-cache
@@ -53,7 +88,7 @@ spec:
             httpGet:
               path: /health
               port: http
-            failureThreshold: 60
+            failureThreshold: 150
             periodSeconds: 10
           readinessProbe:
             httpGet:
@@ -74,6 +109,13 @@ spec:
         - name: huggingface-cache
           persistentVolumeClaim:
             claimName: huggingface-cache
+        # Host path where deploy.sh mounts the trained model directory via
+        # 'minikube mount'. Inside the minikube docker VM this appears at
+        # /mnt/sqora-model when started with --mount-string.
+        - name: model-src
+          hostPath:
+            path: /mnt/sqora-model
+            type: Directory
 ---
 apiVersion: v1
 kind: Service

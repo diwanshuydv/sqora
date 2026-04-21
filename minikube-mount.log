@@ -1,0 +1,14 @@
+nohup: ignoring input
+* Mounting host path /home/raid/sqora/manim-trainer/output/merged_vllm_model into VM as /mnt/sqora-model ...
+  - Mount type:   9p
+  - User ID:      docker
+  - Group ID:     docker
+  - Version:      9p2000.L
+  - Message Size: 262144
+  - Options:      map[]
+  - Bind Address: 192.168.49.1:34093
+* Userspace file server: 
+ufs starting
+* Successfully mounted /home/raid/sqora/manim-trainer/output/merged_vllm_model to /mnt/sqora-model
+
+* NOTE: This process must stay alive for the mount to be accessible ...
