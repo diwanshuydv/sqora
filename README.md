@@ -1,5 +1,7 @@
 # Sqora — Multimodal Research & Deployment Repository
-
+<p align="center">
+  <img src="assets/ui.png" alt="Sqora" width="700">
+</p>
 Professional, production-oriented repository hosting a suite of services, tooling,
 and experiments for text-to-speech, model training, inference orchestration,
 and retrieval-augmented workflows. This repository is organized to support
